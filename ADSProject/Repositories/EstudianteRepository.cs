@@ -6,27 +6,30 @@ namespace ADSProject.Repositories
     public class EstudianteRepository : IEstudiante
     {
         private List<Estudiante> lstEstudiantes = new List<Estudiante>
-    {
-        new Estudiante{IdEstudiante = 1, NonbresEstudiante = "JUAN CARLOS",
-        ApellidoEstudiante = "PEREZ SOSA", CodigoEstudiante = "PS24I04002",
-        CorreoEstudiante = "PS24I04002@usonsonate.edu.sv"
-        }
-    };
+        {
+            new Estudiante{ IdEstudiante = 1, NombresEstudiantes = "Juan Carlos",
+            ApellidosEstudiante = "Perez Sosa", CodigoEstudiante = "PS24I04002",
+            CorreoEstudiante = "PS24I04002@usonsonate.edu.sv"
 
+            }
+        };
 
         public int ActualizarEstudiante(int idEstudiante, Estudiante estudiante)
         {
             try
             {
-                int indice = lstEstudiantes.FindIndex(tpm => tpm.IdEstudiante == idEstudiante);
+                int indice = lstEstudiantes.FindIndex(tmp => tmp.IdEstudiante == idEstudiante);
+
                 lstEstudiantes[indice] = estudiante;
+
                 return idEstudiante;
             }
-            catch (Exception ex)
+            catch (Exception) 
             {
                 throw;
             }
         }
+
 
         public int AgregarEstudiante(Estudiante estudiante)
         {
@@ -36,21 +39,23 @@ namespace ADSProject.Repositories
                 {
                     estudiante.IdEstudiante = lstEstudiantes.Last().IdEstudiante + 1;
                 }
-
                 lstEstudiantes.Add(estudiante);
-
                 return estudiante.IdEstudiante;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
         }
-        public bool EliminarEstudiante(int idEstudiante)
+
+
+        public bool EliminarEstudiante(int IdEstudiante)
         {
-           try
+            try
             {
-                int indice = lstEstudiantes.FindIndex(tmp => tmp.IdEstudiante == idEstudiante);
+                // ontenemos el indice del objeto a eliminar
+                int indice = lstEstudiantes.FindIndex(tmp => tmp.IdEstudiante == IdEstudiante);
+                // procedemos a eliminar el registro
                 lstEstudiantes.RemoveAt(indice);
                 return true;
             }
@@ -59,31 +64,32 @@ namespace ADSProject.Repositories
                 throw;
             }
         }
-        public Estudiante ObtenerEstudiantePorID(int idEstudiante)
+
+        public Estudiante ObtenerEstudiantesPorID(int IdEstudiante)
         {
-          try
+            try 
             {
-                Estudiante estudiante = lstEstudiantes.FirstOrDefault(tmp => tmp.IdEstudiante == idEstudiante);
+                Estudiante estudiante = lstEstudiantes.FirstOrDefault(tmp => tmp.IdEstudiante == IdEstudiante);
+
                 return estudiante;
             }
-            catch (Exception)
-            { 
+            catch 
+            {
                 throw;
             }
-
         }
+
         public List<Estudiante> ObtenerTodosLosEstudiantes()
         {
-            try
+            try 
             {
                 return lstEstudiantes;
+            
             }
-            catch (Exception)
+            catch (Exception) 
             {
                 throw;
             }
-
-
         }
     }
 }

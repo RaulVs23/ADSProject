@@ -4,14 +4,15 @@ namespace ADSProject.Interfaces
 {
     public interface IEstudiante
     {
-    public int AgregarEstudiante(Estudiante estudiante);
-    public int ActualizarEstudiante(int idEstudiante,Estudiante estudiante);
+        public int AgregarEstudiante(Estudiante estudiante);
 
-    public bool EliminarEstudiante(int idEstudiante);
+        public int ActualizarEstudiante(int idEstudiante, Estudiante estudiante);
 
-    public List<Estudiante> ObtenerTodosLosEstudiantes();
+        public bool EliminarEstudiante(int idEstudiante);
 
-    public Estudiante ObtenerEstudiantePorID(int idEstudiante);
+        public List<Estudiante> ObtenerTodosLosEstudiantes();
 
+        public Estudiante ObtenerEstudiantesPorID(int idEstudiante);
+        
     }
 }

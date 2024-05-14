@@ -1,93 +1,91 @@
 ﻿using ADSProject.Interfaces;
 using ADSProject.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+
 
 namespace ADSProject.Repositories
 {
     public class CarreraRepository : ICarrera
     {
-        private List<Carrera> lstCarreras = new List<Carrera>
+        private List<Carrera> lstCarrera = new List<Carrera>
         {
             new Carrera
             {
-                IdCarrera = 1,
-                Codigo = "PS24I04002",
-                NombreCarrera = "Ingeniería de Sistemas"
+                IdCarrera = 1,Codigo="Ciencias01",Nombre="Ciencias y Medio Ambiente"
             }
         };
-
-        public int ActualizarCarrera(int idCarrera, Carrera carrera)
+        public int ActualizarCarrera(int IdCarrera, Carrera carrera)
         {
             try
             {
-                int indice = lstCarreras.FindIndex(tmp => tmp.IdCarrera == idCarrera);
-                lstCarreras[indice] = carrera;
-                return idCarrera;
+                int indice = lstCarrera.FindIndex(tmp => tmp.IdCarrera == IdCarrera);
+                lstCarrera[indice] = carrera;
+
+                return IdCarrera;
             }
-            catch (Exception ex)
+            catch (Exception) 
             {
                 throw;
             }
         }
-
         public int AgregarCarrera(Carrera carrera)
         {
-            try
+            try 
             {
-                if (lstCarreras.Count > 0)
+                if (lstCarrera.Count > 0) 
                 {
-                    carrera.IdCarrera = lstCarreras.Last().IdCarrera + 1;
+                    carrera.IdCarrera = lstCarrera.Last().IdCarrera =
+               lstCarrera.Last().IdCarrera + 1;
                 }
-
-                lstCarreras.Add(carrera);
-
+                lstCarrera.Add(carrera);
                 return carrera.IdCarrera;
             }
-            catch (Exception ex)
-            {
-                throw;
-            }
-        }
-
-        public bool EliminarCarrera(int idCarrera)
-        {
-            try
-            {
-                int indice = lstCarreras.FindIndex(tmp => tmp.IdCarrera == idCarrera);
-                lstCarreras.RemoveAt(indice);
-                return true;
-            }
             catch (Exception)
             {
                 throw;
             }
+            
+
         }
 
-        public Carrera ObtenerCarreraPorID(int idCarrera)
+        public List<Carrera> ObtenertodasLasCarreras()
         {
             try
             {
-                Carrera carrera = lstCarreras.FirstOrDefault(tmp => tmp.IdCarrera == idCarrera);
+                return lstCarrera;
+            }
+            catch (Exception) 
+            {
+                throw;
+            }
+        }
+
+        public bool EliminarCarrera(int IdCarrera)
+        {
+            try
+            {
+                int Indice = lstCarrera.FindIndex(tmp => tmp.IdCarrera == IdCarrera);
+                lstCarrera.RemoveAt(Indice);
+                return true;
+
+            }
+            catch(Exception)  
+            {
+                throw;  
+            }
+        }
+
+        public Carrera ObtenerCarreraPorId(int IdCarrera) 
+        {
+            try
+            {
+                Carrera carrera = lstCarrera.FirstOrDefault(tmp => tmp.IdCarrera == IdCarrera);
+
                 return carrera;
             }
-            catch (Exception)
+            catch (Exception) 
             {
                 throw;
             }
-        }
-
-        public List<Carrera> ObtenerTodosLasCarreras()
-        {
-            try
-            {
-                return lstCarreras;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+        }   
     }
 }

@@ -5,9 +5,13 @@ namespace ADSProject.Interfaces
     public interface ICarrera
     {
         public int AgregarCarrera(Carrera carrera);
-        public int ActualizarCarrera(int idCarrera, Carrera carrera);
-        public bool EliminarCarrera(int idCarrera);
-        public List<Carrera> ObtenerTodosLasCarreras();
-        public Carrera ObtenerCarreraPorID(int idCarrera);
+
+        public int ActualizarCarrera(int IdCarrera, Carrera carrera);
+
+        public bool EliminarCarrera(int IdCarrera);
+
+        public List<Carrera> ObtenertodasLasCarreras();
+
+        public Carrera ObtenerCarreraPorId(int IdCarrera);
     }
 }
