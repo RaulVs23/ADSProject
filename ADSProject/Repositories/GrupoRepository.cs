@@ -3,88 +3,120 @@ using ADSProject.Models;
 
 namespace ADSProject.Repositories
 {
-    public class GrupoRepository:IGrupo
+    public class GrupoRepository : IGrupo
     {
-        private List<Grupo> lstGrupo = new List<Grupo>
+        private List<Grupo> listitaGrupos = new List<Grupo>
         {
-            new Grupo
-            {
-                IdGrupo = 1,IdCarrera=1 ,IdMateria= 1,IdProfesor= 1 ,Ciclo= 1 ,Anio= 1
-            }
+            new Grupo{IdGrupo = 1, IdCarrera = 1, IdMateria = 1, IdProfesor = 1, Ciclo = 01, Anio = 2024}
         };
-        public int ActualizarGrupo(int IdGrupo, Grupo grupo)
+
+        public int ActualizarGrupo(int idGrupo, Grupo grupo)
         {
             try
             {
-                int indice = lstGrupo.FindIndex(tmp => tmp.IdGrupo == IdGrupo);
-                lstGrupo[indice] = grupo;
+                int bandera = 0;
 
-                return IdGrupo;
+                int index = listitaGrupos.FindIndex(tmp => tmp.IdGrupo == idGrupo);
+
+                if (index >= 0)
+                {
+                    listitaGrupos[index] = grupo;
+                    bandera = idGrupo;
+                }
+                else
+                {
+                    bandera = -1;
+                }
+
+                return bandera;
             }
             catch (Exception)
             {
+
                 throw;
             }
         }
+
         public int AgregarGrupo(Grupo grupo)
         {
             try
             {
-                if (lstGrupo.Count > 0) 
+                if (listitaGrupos.Count > 0)
                 {
-                    grupo.IdGrupo = lstGrupo.Last().IdGrupo =
-               lstGrupo.Last().IdGrupo + 1;
+                    grupo.IdGrupo = listitaGrupos.Last().IdGrupo + 1;
                 }
-                lstGrupo.Add(grupo);
+                listitaGrupos.Add(grupo);
+
                 return grupo.IdGrupo;
             }
             catch (Exception)
             {
-                throw;
-            }
 
-
-        }
-
-        public List<Grupo> ObtenertodasLosGrupos()
-        {
-            try
-            {
-                return lstGrupo;
-            }
-            catch (Exception)
-            {
                 throw;
             }
         }
 
-        public bool EliminarGrupo(int IdGrupo)
+
+        public bool EliminarGrupo(int idGrupo)
         {
             try
             {
-                int Indice = lstGrupo.FindIndex(tmp => tmp.IdGrupo == IdGrupo);
-                lstGrupo.RemoveAt(Indice);
-                return true;
+                bool bandera = false;
+                int index = listitaGrupos.FindIndex(aux => aux.IdGrupo == idGrupo);
+
+                if (index >= 0)
+                {
+                    listitaGrupos.RemoveAt(index);
+                    bandera = true;
+                }
+
+                return bandera;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        public Grupo ObtenerGrupoPorID(int idGrupo)
+        {
+            try
+            {
+                var grupo = listitaGrupos.FirstOrDefault(tmp => tmp.IdGrupo == idGrupo);
+
+                return grupo;
 
             }
             catch (Exception)
             {
+
                 throw;
             }
         }
 
         public Grupo ObtenerGrupoPorId(int IdGrupo)
         {
+            throw new NotImplementedException();
+        }
+
+        public List<Grupo> ObtenerGrupos()
+        {
             try
             {
-                Grupo grupo = lstGrupo.FirstOrDefault(tmp => tmp.IdGrupo == IdGrupo);
-
-                return grupo;
+                return listitaGrupos;
             }
             catch (Exception)
             {
+
                 throw;
             }
+        }
+
+        public List<Grupo> ObtenertodasLosGrupos()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -3,89 +3,118 @@ using ADSProject.Models;
 
 namespace ADSProject.Repositories
 {
-    public class ProfesorRepository: IProfesor
+    public class ProfesorRepository : IProfesor
     {
-        private List<Profesor> lstProfesor = new List<Profesor>
+        private List<Profesor> listitaProfesor = new List<Profesor>
         {
-            new Profesor
-            {
-                IdProfesor = 1, NombresProfesor="Édgar Ricardo ", ApellidosProfesor="Arjona Morales", 
-                Email = "Ricardo.Arjona0203@gmail.com"
-            }
+            new Profesor{IdProfesor = 1, NombresProfesor = "Donaldo Alfredo", ApellidosProfesor = "Santos Tepas", Email = "alfredosantos2024@gmail.com"}
         };
-        public int ActualizarProfesor(int IdProfesor, Profesor profesor)
+        public int ActualizarProfesor(int idProfesor, Profesor profesor)
         {
             try
             {
-                int indice = lstProfesor.FindIndex(tmp => tmp.IdProfesor == IdProfesor);
-                lstProfesor[indice] = profesor;
+                int bandera = 0;
 
-                return IdProfesor;
+                int index = listitaProfesor.FindIndex(tmp => tmp.IdProfesor == idProfesor);
+
+                if (index >= 0)
+                {
+                    listitaProfesor[index] = profesor;
+                    bandera = idProfesor;
+                }
+                else
+                {
+                    bandera = -1;
+                }
+
+                return bandera;
             }
             catch (Exception)
             {
+
                 throw;
             }
+
         }
+
         public int AgregarProfesor(Profesor profesor)
         {
             try
             {
-                if (lstProfesor.Count > 0) 
+                if (listitaProfesor.Count > 0)
                 {
-                    profesor.IdProfesor = lstProfesor.Last().IdProfesor =
-               lstProfesor.Last().IdProfesor + 1;
+                    profesor.IdProfesor = listitaProfesor.Last().IdProfesor + 1;
                 }
-                lstProfesor.Add(profesor);
+                listitaProfesor.Add(profesor);
+
                 return profesor.IdProfesor;
             }
             catch (Exception)
             {
+
                 throw;
             }
 
+        }
 
+        public bool EliminarProfesor(int idProfesor)
+        {
+            try
+            {
+                bool bandera = false;
+                int index = listitaProfesor.FindIndex(aux => aux.IdProfesor == idProfesor);
+
+                if (index >= 0)
+                {
+                    listitaProfesor.RemoveAt(index);
+                    bandera = true;
+                }
+
+                return bandera;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+        public Profesor ObtenerProfesorPorID(int idProfesor)
+        {
+            try
+            {
+                var profesor = listitaProfesor.FirstOrDefault(tmp => tmp.IdProfesor == idProfesor);
+
+                return profesor;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public List<Profesor> ObtenerProfesores()
+        {
+            try
+            {
+                return listitaProfesor;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public List<Profesor> ObtenertodasLosProfesores()
         {
-            try
-            {
-                return lstProfesor;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public bool EliminarProfesor(int IdProfesor)
-        {
-            try
-            {
-                int Indice = lstProfesor.FindIndex(tmp => tmp.IdProfesor == IdProfesor);
-                lstProfesor.RemoveAt(Indice);
-                return true;
-
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            throw new NotImplementedException();
         }
 
         public Profesor ObtenerProfesoresPorId(int IdProfesor)
         {
-            try
-            {
-                Profesor profesor = lstProfesor.FirstOrDefault(tmp => tmp.IdProfesor == IdProfesor);
-
-                return profesor;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            throw new NotImplementedException();
         }
     }
 }

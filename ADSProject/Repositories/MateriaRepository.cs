@@ -5,90 +5,121 @@ namespace ADSProject.Repositories
 {
     public class MateriaRepository : IMateria
     {
-        private List<Materia> lstMateria = new List<Materia>
+        private List<Materia> listitaMaterias = new List<Materia>
         {
-            new Materia{ IdMateria = 1, Nombremateria = "Lenguaje"
-
-            }
+            new Materia{IdMateria = 1, Nombremateria = "Estatica"}
         };
 
-        public int ActualizarMateria(int IdMateria, Materia materia)
+        public int Actualizarmateria(int idMateria, Materia materia)
         {
             try
             {
-                int indice = lstMateria.FindIndex(tmp => tmp.IdMateria == IdMateria);
+                int bandera = 0;
 
-                lstMateria[indice] = materia;
+                int index = listitaMaterias.FindIndex(tmp => tmp.IdMateria == idMateria);
 
-                return IdMateria;
+                if (index >= 0)
+                {
+                    listitaMaterias[index] = materia;
+                    bandera = idMateria;
+                }
+                else
+                {
+                    bandera = -1;
+                }
+
+                return bandera;
             }
             catch (Exception)
             {
+
                 throw;
             }
         }
 
+        public int ActualizarMateria(int IdMateria, Materia materia)
+        {
+            throw new NotImplementedException();
+        }
 
         public int AgregarMateria(Materia materia)
         {
             try
             {
-                if (lstMateria.Count > 0)
+                if (listitaMaterias.Count > 0)
                 {
-                    materia.IdMateria = lstMateria.Last().IdMateria + 1;
+                    materia.IdMateria = listitaMaterias.Last().IdMateria + 1;
                 }
-                lstMateria.Add(materia);
+                listitaMaterias.Add(materia);
+
                 return materia.IdMateria;
             }
             catch (Exception)
             {
+
                 throw;
             }
         }
 
-
-        public bool EliminarMateria(int IdMateria)
+        public bool EliminarMateria(int idMateria)
         {
             try
             {
-                // ontenemos el indice del objeto a eliminar
-                int indice = lstMateria.FindIndex(tmp => tmp.IdMateria == IdMateria);
-                // procedemos a eliminar el registro
-                lstMateria.RemoveAt(indice);
-                return true;
+                bool bandera = false;
+                int index = listitaMaterias.FindIndex(aux => aux.IdMateria == idMateria);
+
+                if (index >= 0)
+                {
+                    listitaMaterias.RemoveAt(index);
+                    bandera = true;
+                }
+
+                return bandera;
             }
             catch (Exception)
             {
+
+                throw;
+            }
+        }
+
+        public Materia ObtenerMateriaPorID(int idMateria)
+        {
+            try
+            {
+                var materia = listitaMaterias.FirstOrDefault(tmp => tmp.IdMateria == idMateria);
+
+                return materia;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<Materia> ObtenerMaterias()
+        {
+            try
+            {
+                return listitaMaterias;
+            }
+            catch (Exception)
+            {
+
                 throw;
             }
         }
 
         public Materia ObtenerMateriasporId(int IdMateria)
         {
-            try
-            {
-                Materia materia = lstMateria.FirstOrDefault(tmp => tmp.IdMateria == IdMateria);
-
-                return materia;
-            }
-            catch
-            {
-                throw;
-            }
+            throw new NotImplementedException();
         }
 
         public List<Materia> ObtenerTodosLasMaterias()
         {
-            try
-            {
-                return lstMateria;
-
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            throw new NotImplementedException();
         }
-
     }
 }
